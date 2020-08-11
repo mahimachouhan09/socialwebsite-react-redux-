@@ -1,10 +1,10 @@
 import React from "react";  
   
 const commentList = ( { comments }) => (  
-    <ul> 
+    <ul className = 'comment-ul'> 
     { comments.length} comments
         {comments.map( value => (  
-            <li key = {value.id}>  
+            <li className ='comment-li' key = {value.id}>  
               {value.comment} by  {value.email}  
             </li>  
         ))  

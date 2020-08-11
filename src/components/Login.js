@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { login } from '../actions/index'
 import Logincontainer from '../container/Logincontainer';
+import '../App.css';
+// import { Redirect } from 'react-router'
+// import { withRouter} from 'react-router-dom'
 
 export class Login extends Component {
   constructor(props){
@@ -16,41 +19,44 @@ export class Login extends Component {
   onInputChange = (event) => this.setState({email: event.target.value})
   onPostimgChange = (event) => this.setState({postimg: event.target.value})
   onCaptionChange = (event) => this.setState({caption: event.target.value})
-  email = value =>
+  handleEmailValidate = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
   'Invalid email address' : undefined
 
-  aol = value =>
-  value && /.+@aol\.com/.test(value) ?
-  'Really? You still use AOL for your email?' : undefined
+  // aol = value =>
+  // value && /.+@aol\.com/.test(value) ?
+  // 'Really? You still use AOL for your email?' : undefined
   
   onFormSubmit = event => {
     event.preventDefault();
     this.props.login(this.state.email,this.state.postimg,this.state.caption)
+    // {this.props.history.push('/postfeed')}
     this.setState({
       email : '',
       postimg:'',
       caption:''
     })
+    alert('scroll down for feed')
+    // return <Redirect from = "/" to = "/postfeed/" />;
   }
 
   render() {
     return (
-      <div align= 'center'>
-        <form className ='form' onSubmit = {this.onFormSubmit}>
+      <div className = 'login-div' align = 'center'>
+        <form className ='login-div-form' onSubmit = {this.onFormSubmit}>
           <label>Email</label>
           <input className = 'form-input' 
             type = 'email'
             placeholder = 'enter email'
             value = { this.state.email }
             onChange = { this.onInputChange}
-            validate={this.email}
-            warn={this.aol}
+            validate={this.handleEmailValidate}
+            // warn={this.aol}
             required
             /><br />
 
-            <label>post image</label>
-            <input className = 'form-input' 
+            <label className = 'form-input-postimg-label'>post pic</label>
+            <input className = 'form-input-postimg' 
               type = 'file'
               value = { this.state.postimg }
               onChange = { this.onPostimgChange}
@@ -64,10 +70,10 @@ export class Login extends Component {
               value = { this.state.caption }
               onChange = { this.onCaptionChange}
             /><br />
-          <br/><br />
-
-          <button className= 'form-button' type= 'submit'>Post</button>
-        </form>
+          <br/><br/>
+          <button className= 'form-button' type= 'submit'
+          >Post</button>
+        </form><hr/>
         <Logincontainer />
       </div>
     )

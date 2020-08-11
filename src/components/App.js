@@ -7,23 +7,17 @@ export class App extends Component {
   render() {
     return (
       <Router>
-      <div>
+      <div className ='App-div'>
         <nav>
-          <ul className = 'nav-ul'>
-            <header className ='App-header'>Social Website</header>
+          <ul className = 'App-nav-ul'>
+            <header className ='App-header'>Social App Website</header>
             <li>
-              <Link exact className = 'nav-ul-links' to="/">Home page</Link>
-            </li>
-            <li>
-              <Link className = 'nav-ul-links' to="/postfeed">postfeed</Link>
+              <Link className = 'nav-ul-links' to="/">Home page</Link>
             </li>
           </ul>
         </nav>
       <Switch>
         <Route exact path="/" >
-          <Login />
-        </Route>
-        <Route exact path="/postfeed" >
           <Login />
         </Route>
       </Switch>
