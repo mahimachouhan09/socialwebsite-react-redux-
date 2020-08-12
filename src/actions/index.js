@@ -1,5 +1,4 @@
-import { LOGIN } from './actionTypes';
-import { ADD_COMMENT } from './actionTypes'
+import { LOGIN, ADD_COMMENT} from './actionTypes'
 
 export const login = (email, postimg ,caption)=> ({
     type: LOGIN,

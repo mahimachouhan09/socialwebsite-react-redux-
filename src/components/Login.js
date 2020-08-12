@@ -12,32 +12,45 @@ export class Login extends Component {
   this.state= ({ 
     email :'',
     postimg:'',
-    caption:'' 
+    caption:'',
+    // imgarray : []
   })
  }
 
   onInputChange = (event) => this.setState({email: event.target.value})
-  onPostimgChange = (event) => this.setState({postimg: event.target.value})
-  onCaptionChange = (event) => this.setState({caption: event.target.value})
-  handleEmailValidate = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
-  'Invalid email address' : undefined
 
-  // aol = value =>
-  // value && /.+@aol\.com/.test(value) ?
-  // 'Really? You still use AOL for your email?' : undefined
+  // onPostimgChange = (event) =>{
+  //  this.setState({imgarray: event.target.files[0]})
+  //   console.log(this.state.imgarray)
+  // }
+
+  onPostimgChange = (event) => { this.setState({postimg: event.target.value}) }
+
+  onCaptionChange = (event) => this.setState({caption: event.target.value})
   
+  validateForm = () => {
+    if (/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/.test(this.state.email)){
+      return true
+    }
+    return false
+  }
+
+
   onFormSubmit = event => {
     event.preventDefault();
-    this.props.login(this.state.email,this.state.postimg,this.state.caption)
-    // {this.props.history.push('/postfeed')}
-    this.setState({
-      email : '',
-      postimg:'',
-      caption:''
-    })
+    const isValid = this.validateForm()
+    if(isValid){
+      this.props.login(this.state.email,this.state.postimg,this.state.caption)
+      // {this.props.history.push('/postfeed')}
+      this.setState({
+        email : '',
+        postimg:'',
+        caption:'',
+        // imgarray :[]
+      })
     alert('scroll down for feed')
     // return <Redirect from = "/" to = "/postfeed/" />;
+  }
   }
 
   render() {
@@ -50,29 +63,27 @@ export class Login extends Component {
             placeholder = 'enter email'
             value = { this.state.email }
             onChange = { this.onInputChange}
-            validate={this.handleEmailValidate}
-            // warn={this.aol}
             required
-            /><br />
+          /><br />
 
-            <label className = 'form-input-postimg-label'>post pic</label>
-            <input className = 'form-input-postimg' 
-              type = 'file'
-              value = { this.state.postimg }
-              onChange = { this.onPostimgChange}
-              required
-            /><br />
+          <label className = 'form-input-postimg-label'>post pic</label>
+          <input className = 'form-input-postimg' 
+            type = 'file'
+            value = { this.state.postimg }
+            // onChange = {(event) => this.onPostimgChange(file)}
+             onChange = { this.onPostimgChange}
+            required
+          /><br />
 
-           <label>caption</label>
-           <input className = 'form-input' 
-              type = 'text'
-              placeholder = 'enter caption(optional)'
-              value = { this.state.caption }
-              onChange = { this.onCaptionChange}
-            /><br />
+          <label>caption</label>
+          <input className = 'form-input' 
+            type = 'text'
+            placeholder = 'enter caption(optional)'
+            value = { this.state.caption }
+            onChange = { this.onCaptionChange}
+          /><br />
           <br/><br/>
-          <button className= 'form-button' type= 'submit'
-          >Post</button>
+          <button className= 'form-button' type= 'submit'>Post</button>
         </form><hr/>
         <Logincontainer />
       </div>

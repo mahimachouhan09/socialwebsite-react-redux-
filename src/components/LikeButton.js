@@ -4,7 +4,7 @@ class LikeButton extends React.Component {
   constructor(props){
     super(props)
     this.state = ({
-    likes: 0
+      likes: 0
     });
   }
 
@@ -16,8 +16,12 @@ class LikeButton extends React.Component {
   };
 
   render() {
-      return <button className ='like-comment-button' onClick={this.addLike} id={this.props.itemId} >Likes: {this.state.likes}</button>
+      return <button className ='like-comment-button' onClick = {this.addLike} 
+        id = {this.props.itemId} >
+        Likes: {this.state.likes}
+        </button>
     }
   }
 
   export default LikeButton;
+
